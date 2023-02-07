@@ -1,9 +1,9 @@
-Universal LPC Spritesheet Character Generator
+Universal LPC기반 젭을 위한 스프라이트시트 생성기입니다. 
 =============================================
 
-Based on [Universal LPC Spritesheet](https://github.com/jrconway3/Universal-LPC-spritesheet).
+[Universal LPC Spritesheet]을 기반으로 하고 있습니다.(https://github.com/jrconway3/Universal-LPC-spritesheet).
 
-Try it out [here](https://sanderfrenken.github.io/Universal-LPC-Spritesheet-Character-Generator/).
+여기에서 테스트 해볼 수 있습니다. [here](https://jkf87.github.io/Spritesheet_zep_style).
 
 The project you are looking now is an expansion on the above mentioned projects. I try to include all LPC created art up to now.
 
