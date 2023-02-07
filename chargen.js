@@ -372,8 +372,8 @@ $(document).ready(function() {
                     });
         }
 
-        // Clear everything if illegal combination used
-        // Probably should try to prevent this
+        // 불법 조합이 사용된 경우 모두 지웁니다.
+        // 아마 이것을 방지해야 할 것입니다.
         $("input[type=radio], input[type=checkbox]").each(function(index) {
             if ($(this).data("required")) {
                 var requirements = $(this).data("required").split(",");
@@ -574,7 +574,7 @@ $(document).ready(function() {
             }
             
         }
-        setTimeout(nextFrame, 1000 / 8);
+        setTimeout(nextFrame, 156);
     }
     nextFrame();
 });
