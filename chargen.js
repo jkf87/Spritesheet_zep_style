@@ -574,7 +574,7 @@ $(document).ready(function() {
             }
             
         }
-        setTimeout(nextFrame, 156);
+        setTimeout(nextFrame, 300);
     }
     nextFrame();
 });
