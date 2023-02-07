@@ -2,18 +2,18 @@ _.mixin(_.str.exports());
 
 $(document).ready(function() {
 
-    // Get querystring paramters
+    // 쿼리 문자열 매개 변수 가져오기
     var params = jHash.val();
     var zPosition = 0;
 
-    // on hash (url) change event, interpret and redraw
+    // 해시(URL) 변경 이벤트, 해석 및 다시 그리기
     jHash.change(function() {
         params = jHash.val();
         interpretParams();
         redraw();
     });
 
-    // set params and redraw when any radio button or checkbox is clicked on
+    // 매개 변수를 설정하고 라디오 버튼이나 확인란을 클릭하면 다시 그립니다.
     $("input[type=radio], input[type=checkbox]").each(function() {
         $(this).click(function() {
             setParams();
@@ -21,11 +21,11 @@ $(document).ready(function() {
         });
     });
 
-    // When radio button is unchecked, its children should be too.
+    // 라디오 버튼이 선택 해제되어 있으면 그 자식도 선택 해제되어 있어야 합니다.
     $("input[type=radio]").each(function() {
         $(this).change(function() {
             var name = $(this).attr("name");
-            // Sadly we need to use setTimeout
+            // 안타깝게도 설정 시간 초과를 사용해야 합니다.
             window.setTimeout(function() {
                 $("li>span>input[name=" + name + "]").each(function() {
                     if (!($(this).prop("checked"))) {
@@ -44,14 +44,14 @@ $(document).ready(function() {
         });
     });
 
-    // Do not multiple toggle when clicking on children
+    // 어린이를 클릭할 때 다중 토글하지 않기
     $("#chooser>ul>li>ul>li>ul>li").click(function(event) {
         event.stopPropagation();
     });
 
-    // Toggle display of a list elements children when clicked
-    // Do not do so twice, once on label then on input
-    // Again, do not multiple toggle when clicking on children
+    // 클릭 시 목록 요소 자식 표시 토글
+    // 레이블에 한 번, 입력에 한 번 두 번 토글하지 마세요.
+    // 다시 말하지만, 자식을 클릭할 때 여러 번 토글하지 마세요.
     $("#chooser>ul>li>ul>li").click(function(event) {
         if (!($(event.target).get(0).tagName == "LABEL")) {
             $(this).children("span").toggleClass("condensed").toggleClass("expanded");
@@ -61,8 +61,8 @@ $(document).ready(function() {
         event.stopPropagation();
     });
 
-    // Toggle display of a list elements children when clicked
-    // Again, do not multiple toggle when clicking on children
+    // 클릭 시 목록 요소 자식 표시 토글
+    // 다시 말하지만, 자식을 클릭할 때 다중 토글하지 마십시오.
     $("#chooser>ul>li").click(function(event) {
         $(this).children("span").toggleClass("condensed").toggleClass("expanded");
         var $ul = $(this).children("ul");
@@ -70,7 +70,7 @@ $(document).ready(function() {
         event.stopPropagation();
     });
 
-    // When clicking on collapse all link, collapse all uls in #chooser
+    // 모두 접기 링크를 클릭할 때 #chooser의 모든 uls를 접습니다.
     $("#collapse").click(function() {
         $("#chooser>ul ul").hide('slow');
         $("#chooser>ul span.expanded").removeClass("expanded").addClass("condensed");
@@ -90,7 +90,7 @@ $(document).ready(function() {
     });
 
     function previewFile(){
-        var preview = document.querySelector('img'); //selects the query named img
+        var preview = document.querySelector('img'); //이미지라는 이름의 쿼리를 선택합니다.
         var file    = document.querySelector('input[type=file]').files[0]; //sames as here
 
         var img = new Image;
@@ -106,7 +106,7 @@ $(document).ready(function() {
         link.download = filename;
     };
 
-    // Save canvas as PNG
+    //png파일로 저장합니다.
     $("#saveAsPNG").click(function() {
         renameImageDownload(this, canvas, 'Download' + Math.floor(Math.random() * 100000) + '.png');
     });
@@ -125,7 +125,7 @@ $(document).ready(function() {
         }, 0, false);
     });
 
-    // Get colors from canvas
+    // 캔버스에서 색상 가져오기
     $("#changeColors").click(function() {
       const colorsFound = [];
       var imgData=ctx.getImageData(0,0,canvas.width,canvas.height);
@@ -138,7 +138,7 @@ $(document).ready(function() {
         document.getElementById("colorsChanged").value = "No input for RGB change";
         return;
       }
-      // Get colors maxed at 200
+      // 최대 색상을 200으로 설정
       for (var i=0;i<imgData.data.length;i+=4) {
         let r = imgData.data[i];
         let g = imgData.data[i+1];
@@ -154,7 +154,7 @@ $(document).ready(function() {
       }
       document.getElementById("colorsChanged").value = "Colors detected: " + colorsFound.length;
 
-      // change colors
+      // 색상 바꾸기
       for (var i=0;i<imgData.data.length;i+=4) {
         let r = imgData.data[i];
         let g = imgData.data[i+1];
@@ -171,7 +171,7 @@ $(document).ready(function() {
       }
       ctx.putImageData(imgData,0,0);
 
-      // draw found colors
+      // 찾은 색상 그리기
       for (var i=0;i<colorsFound.length;i+=1) {
         var colors = colorsFound[i].split("|");
         ctx.beginPath();
@@ -181,47 +181,47 @@ $(document).ready(function() {
       }
     });
 
-    // Determine if an oversize element used
+    // 오버사이즈 요소가 사용되었는지 확인
     var oversize = $("input[type=radio]").filter(function() {
         return $(this).data("oversize");
     }).length > 0;
 
-    // Expand canvas if oversize element used
+    // 오버사이즈 요소를 사용한 경우 캔버스 확장
     if (oversize) {
-        canvas.width = 1536;
-        canvas.height = 1344 + 768;
+        canvas.width = 1152; // 1536 ->  1152로 변경 (24개)
+        canvas.height = 1344 + 768; // 33개
     } else {
-        canvas.width = 832;
-        canvas.height = 1344;
+        canvas.width = 624; //832 -> 624
+        canvas.height = 1344; // 13개
     }
     $("#chooser>ul").css("height", canvas.height);
 
-    // called each time redrawing
+    // 다시 그릴 때마다 호출됩니다.
     function redraw() {
         const zposPreview = parseInt(document.getElementById("ZPOS").value) || 0;
         let didDrawPreview = false;
         zPosition = 0;
-        // start over
+        // 다시 시작
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        // determine if an oversize element is being used
+        // 오버사이즈 요소가 사용되고 있는지 확인합니다.
         oversize = $("input[type=radio]:checked").filter(function() {
             return $(this).data("oversize");
         }).length > 0;
 
-        // If an oversize element is being used, expand canvas,
-        // otherwise return it to normal size
+        // 오버사이즈 요소가 사용 중이면 캔버스를 확장합니다,
+        // 그렇지 않으면 일반 크기로 반환합니다.
         if (oversize) {
-            canvas.width = 1536;
+            canvas.width = 1152;
             canvas.height = 1344 + 768;
         } else {
-            canvas.width = 832;
+            canvas.width = 624;
             canvas.height = 1344;
         }
         $("#chooser>ul").css("height", canvas.height);
         oversize = !!oversize;
 
-        // non oversize elements
+        // 크기가 크지 않은 요소
         $("input[type=radio]:checked, input[type=checkbox]:checked").filter(function() {
             return !$(this).data("oversize");
         }).each(function(index) {
@@ -231,18 +231,18 @@ $(document).ready(function() {
                     didDrawPreview = true;
                 }
             }
-            // save this in closure
+            // 이 내용을 닫기에 저장
             var $this = $(this);
 
-            // Determine if male or female selected
+            // 남성 또는 여성 선택 여부 확인
             var isMale = $("#sex-male").prop("checked");
             var isFemale = $("#sex-female").prop("checked");
 
-            // if data-file specified
+            // 데이터 파일이 지정된 경우
             if ($(this).data("file")) {
                 var img = getImage($(this).data("file"));
 
-                // if data-behind specified, draw behind existing pixels
+                // 데이터-비하인드가 지정된 경우 기존 픽셀 뒤에 그리기
                 if ($(this).data("behind")) {
                     ctx.globalCompositeOperation = "destination-over";
                     drawImage(ctx, img);
@@ -251,7 +251,7 @@ $(document).ready(function() {
                 drawImage(ctx, img);
             }
 
-            // if data-file_behind specified
+            // 데이터-파일_배경이 지정된 경우
             if ($(this).data("file_behind")) {
                 var img = getImage($(this).data("file_behind"));
                 ctx.globalCompositeOperation = "destination-over";
@@ -259,7 +259,7 @@ $(document).ready(function() {
                 ctx.globalCompositeOperation = "source-over";
             }
 
-            // Deal with shield/chain hat overlap issue
+            // 방패/체인 모자 겹침 문제 해결
             if ($(this).data("file_hat") && $("#hat_chain").prop("checked")) {
                 var img = getImage($(this).data("file_hat"));
                 drawImage(ctx, img);
@@ -269,7 +269,7 @@ $(document).ready(function() {
                 drawImage(ctx, img);
             }
 
-            // if data-file_male and data-file_female is specified
+            // 데이터 파일_남성 및 데이터 파일_여성이 지정된 경우
             if (isMale && $(this).data("file_male")) {
                 var img = getImage($(this).data("file_male"));
                 drawImage(ctx, img);
@@ -279,7 +279,7 @@ $(document).ready(function() {
                 drawImage(ctx, img);
             }
 
-            // if data-file_male_light... and data-file_female_light... is specified
+            // 데이터 파일_남성_라이트... 및 데이터 파일_여성_라이트...가 지정된 경우
             var bodytypes = ["none", "light", "dark", "dark2", "tanned", "tanned2", "darkelf", "darkelf2", "reptbluewings", "reptbluenowings", "reptredwings", "reptdarkwings", "reptdarknowings", "white", "peach", "brown", "olive", "black"];
             if (isMale) {
                 _.each(bodytypes, function(bodytype) {
@@ -298,7 +298,7 @@ $(document).ready(function() {
                 });
             }
 
-            // Draw shadows for plain or ponytail2 hairstyles appropriate to body color
+            // 일반 또는 포니테일2 헤어 스타일에 적합한 그림자 그리기체색에 적합한 헤어 스타일
             var id = $(this).attr("id");
             if (_.startsWith(id, "hair-")) {
                 var style = id.substring(5, id.indexOf("-", 5));
@@ -319,16 +319,16 @@ $(document).ready(function() {
             }
         });
 
-        if (!didDrawPreview) { // zposition was to high or low, draw anyways over all
+        if (!didDrawPreview) { // z포지션이 높거나 낮음, 어쨌든 모든 것을 그립니다.
             drawPreview();
             didDrawPreview = true;
         }
 
-        // Oversize weapons: Copy existing canvas poses to new locations
-        // with 192x192 padding rather than 64x64
-        // data-oversize="1" means thrust weapon
-        // data-oversize="2" means slash weapon
-        // use appropriate thrust or slash pose
+        // 대형 무기: 기존 캔버스 포즈를 새 위치로 복사
+        // 64x64가 아닌 192x192 패딩 포함 -> 48x64, 144x192
+        // data-oversize="1"은 추력 무기를 의미합니다.
+        // 데이터 오버사이즈="2"는 슬래시 무기를 의미합니다.
+        // 적절한 추력 또는 슬래시 포즈 사용
         if (oversize) {
             $("input[type=radio]:checked").filter(function() {
                 return $(this).data("oversize");
@@ -416,7 +416,7 @@ $(document).ready(function() {
         }
     }
 
-    // Change checkboxes based on parameters
+    // 매개변수에 따라 확인란 변경
     function interpretParams() {
         $("input[type=radio]").each(function() {
             var words = _.words($(this).attr('id'), '-');
@@ -428,7 +428,7 @@ $(document).ready(function() {
         });
     }
 
-    // Set parameters in response to click on any radio button or checkbox
+    // 라디오 버튼 또는 확인란 클릭에 대한 응답으로 매개변수 설정
     function setParams() {
         $("input[type=radio]:checked").each(function() {
             var words = _.words($(this).attr('id'), '-');
@@ -445,7 +445,7 @@ $(document).ready(function() {
         jHash.val(params);
     }
 
-    // Cache images
+    // 이미지 캐시
     var images = {};
 
     function getImage(imgRef) {
@@ -453,7 +453,7 @@ $(document).ready(function() {
             return images[imgRef];
         else {
 
-            // Load image if not in cache
+            // 캐시에 없는 경우 이미지 로드
             var img = new Image();
             img.src = "spritesheets/" + imgRef;
             img.onload = redraw;
@@ -468,7 +468,7 @@ $(document).ready(function() {
             return images[imgRef];
         } else {
 
-            // Load image if not in cache
+            // 캐시에 없는 경우 이미지 로드
             var img = new Image();
             img.src = "spritesheets/" + imgRef;
             img.onload = function() { callback(img) };
@@ -477,7 +477,7 @@ $(document).ready(function() {
         }
     }
 
-    // Do not stop running all javascript if image not available
+    // 이미지를 사용할 수 없는 경우 모든 자바스크립트 실행을 중지하지 않습니다.
     function drawImage(ctx, img) {
         try {
             ctx.drawImage(img, 0, 0);
@@ -487,7 +487,7 @@ $(document).ready(function() {
         }
     }
 
-    // Draw now - on ready
+    // 그리기 - 준비 완료
     interpretParams();
     if (Object.keys(params).length == 0) {
         $("input[type=reset]").click();
@@ -495,7 +495,7 @@ $(document).ready(function() {
     }
     redraw();
 
-    // Draw preview images
+    // 프리뷰 이미지 그리기
     function drawPreviews() {
         this.find("input[type=radio], input[type=checkbox]").filter(function() {
             return $(this).is(":visible");
@@ -540,7 +540,7 @@ $(document).ready(function() {
         });
     };
 
-    // Preview Animation
+    // 프리뷰 애니메이션
     var oversize = $(this).data("oversize");
     var anim = $("#previewAnimations").get(0);
     var animCtx = anim.getContext("2d");
