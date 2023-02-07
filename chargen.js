@@ -515,7 +515,7 @@ $(document).ready(function() {
                 var callback = function(img) {
                     try {
                         if (oversize)
-                            prevctx.drawImage(img, 0, 2 * 192, 192, 192, 0, 0, 48, 64);
+                            prevctx.drawImage(img, 0, 2 * 192, 144, 192, 0, 0, 48, 64);
                         else
                             prevctx.drawImage(img, 0, previewRow * 48, 64, 48, 0, 0, 48, 64);
                     } catch (err) {
