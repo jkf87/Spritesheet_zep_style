@@ -337,8 +337,8 @@ $(document).ready(function() {
                 if (type == 1) {
                     for (var i = 0; i < 8; ++i)
                         for (var j = 0; j < 4; ++j) {
-                            var imgData = ctx.getImageData(64 * i, 256 + 64 * j, 64, 64);
-                            ctx.putImageData(imgData, 64 + 192 * i, 1408 + 192 * j);
+                            var imgData = ctx.getImageData(48 * i, 256 + 64 * j, 48, 64);
+                            ctx.putImageData(imgData, 48 + 192 * i, 1408 + 192 * j);
                         }
                         if ($("#sex-male").prop("checked") && $(this).data("file_male")) {
                             var img = getImage($(this).data("file_male"));
@@ -353,8 +353,8 @@ $(document).ready(function() {
                     } else if (type == 2) {
                         for (var i = 0; i < 6; ++i)
                             for (var j = 0; j < 4; ++j) {
-                                var imgData = ctx.getImageData(64 * i, 768 + 64 * j, 64, 64);
-                                ctx.putImageData(imgData, 64 + 192 * i, 1408 + 192 * j);
+                                var imgData = ctx.getImageData(48 * i, 768 + 64 * j, 64, 64);
+                                ctx.putImageData(imgData, 48 + 192 * i, 1408 + 192 * j);
                             }
                             if ($("#sex-male").prop("checked") && $(this).data("file_male")) {
                                 var img = getImage($(this).data("file_male"));
@@ -499,7 +499,7 @@ $(document).ready(function() {
             if (!$(this).parent().hasClass("hasPreview")) {
                 var prev = document.createElement("canvas");
                 var oversize = $(this).data("oversize");
-                prev.setAttribute("width", 64);
+                prev.setAttribute("width", 48);
                 prev.setAttribute("height", 64);
                 var prevctx = prev.getContext("2d");
                 var img = null;
@@ -511,9 +511,9 @@ $(document).ready(function() {
                 var callback = function(img) {
                     try {
                         if (oversize)
-                            prevctx.drawImage(img, 0, 2 * 192, 192, 192, 0, 0, 64, 64);
+                            prevctx.drawImage(img, 0, 2 * 192, 192, 192, 0, 0, 48, 64);
                         else
-                            prevctx.drawImage(img, 0, previewRow * 64, 64, 64, 0, 0, 64, 64);
+                            prevctx.drawImage(img, 0, previewRow * 48, 64, 48, 0, 0, 48, 64);
                     } catch (err) {
                         console.log(err);
                     }
@@ -565,7 +565,7 @@ $(document).ready(function() {
                 animCtx.drawImage(canvas, currentFrame * 192, (animRowStart - 3) * 192, 192, 192, i * 192, 0, 192, 192);
                 break;
             } else {
-                animCtx.drawImage(canvas, currentFrame * 64, (animRowStart + i) * 64, 64, 64, i * 64, 0, 64, 64);
+                animCtx.drawImage(canvas, currentFrame * 48, (animRowStart + i) * 64, 64, 64, i * 64, 0, 48, 64);
             }
             
         }
