@@ -338,6 +338,8 @@ $(document).ready(function() {
                     for (var i = 0; i < 8; ++i)
                         for (var j = 0; j < 4; ++j) {
                             var imgData = ctx.getImageData(48 * i, 256 + 64 * j, 48, 64);
+                            ctx.putImageData(imgData, 64 + 192 * i, 1408 + 192 * j);
+                            var imgData = ctx.getImageData(48 * i, 256 + 64 * j, 48, 64);
                             ctx.putImageData(imgData, 48 + 192 * i, 1408 + 192 * j);
                         }
                         if ($("#sex-male").prop("checked") && $(this).data("file_male")) {
@@ -353,6 +355,8 @@ $(document).ready(function() {
                     } else if (type == 2) {
                         for (var i = 0; i < 6; ++i)
                             for (var j = 0; j < 4; ++j) {
+                                var imgData = ctx.getImageData(48 * i, 768 + 64 * j, 48, 64);
+                                ctx.putImageData(imgData, 64 + 192 * i, 1408 + 192 * j);
                                 var imgData = ctx.getImageData(48 * i, 768 + 64 * j, 64, 64);
                                 ctx.putImageData(imgData, 48 + 192 * i, 1408 + 192 * j);
                             }
@@ -565,6 +569,7 @@ $(document).ready(function() {
                 animCtx.drawImage(canvas, currentFrame * 192, (animRowStart - 3) * 192, 192, 192, i * 192, 0, 192, 192);
                 break;
             } else {
+                animCtx.drawImage(canvas, currentFrame * 48, (animRowStart + i) * 64, 64, 48, i * 64, 0, 48, 64);
                 animCtx.drawImage(canvas, currentFrame * 48, (animRowStart + i) * 64, 64, 64, i * 64, 0, 48, 64);
             }
             
