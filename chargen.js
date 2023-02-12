@@ -504,7 +504,7 @@ $(document).ready(function() {
             if (!$(this).parent().hasClass("hasPreview")) {
                 var prev = document.createElement("canvas");
                 var oversize = $(this).data("oversize");
-                prev.setAttribute("width", 48);
+                prev.setAttribute("width", 64);
                 prev.setAttribute("height", 64);
                 var prevctx = prev.getContext("2d");
                 var img = null;
@@ -578,7 +578,7 @@ $(document).ready(function() {
         setTimeout(nextFrame, 300);
     }
     nextFrame();
-    
+
 // 리사이즈 함수 추가하기
     function cropAndResizeImage(src, rowSize, colSize, newWidth, newHeight) {
         // Open the large image
