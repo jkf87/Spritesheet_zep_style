@@ -149,7 +149,8 @@ function cropAndResizeImage(src, rowSize, colSize, newWidth, newHeight) {
     });
 
     var canvas = $("#spritesheet").get(0); //document.getElementById("spritesheet")와 동일
-    // var canvas2 = cropAndResizeImage("spritesheet", 64, 64, 48, 64)
+    var canvasUrl = canvas.URL
+    var canvas2 = cropAndResizeImage(canvasUrl, 64, 64, 48, 64)
     var ctx = canvas.getContext("2d");
 
     const maxColors = 200;
@@ -181,7 +182,7 @@ function cropAndResizeImage(src, rowSize, colSize, newWidth, newHeight) {
 
     //png파일로 저장합니다.
     $("#saveAsPNG").click(function() {
-        renameImageDownload(this, canvas, 'Download' + Math.floor(Math.random() * 100000) + '.png');
+        renameImageDownload(this, canvas2, 'Download' + Math.floor(Math.random() * 100000) + '.png');
     });
 
     $("#resetAll").click(function() {
