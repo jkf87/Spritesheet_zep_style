@@ -76,7 +76,7 @@ function cropAndResizeImage(src, rowSize, colSize, newWidth, newHeight) {
   }
   
   // Example usage:
-  cropAndResizeImage("/content/large image.png", 64, 64, 48, 64);
+  cropAndResizeImage("canvas", 64, 64, 48, 64);
   
     // 해시(URL) 변경 이벤트, 해석 및 다시 그리기
     jHash.change(function() {
