@@ -6,7 +6,78 @@ $(document).ready(function() {
     // 쿼리 문자열 매개 변수 가져오기
     var params = jHash.val();
     var zPosition = 0;
-
+// 리사이즈 함수 추가하기
+function cropAndResizeImage(src, rowSize, colSize, newWidth, newHeight) {
+    // Open the large image
+    var img = new Image();
+    img.src = src;
+    img.onload = function() {
+      var canvas = document.createElement('canvas');
+      var ctx = canvas.getContext('2d');
+  
+      // Get the width and height of the image
+      var width = img.width;
+      var height = img.height;
+  
+      // Calculate the number of rows and columns of small images
+      var rows = height / rowSize;
+      var cols = width / colSize;
+  
+      // Create a list to store the cropped and resized images
+      var small_images = [];
+  
+      // Crop and resize the small images
+      for (var row = 0; row < rows; row++) {
+        for (var col = 0; col < cols; col++) {
+          // Calculate the coordinates of the current small image
+          var x1 = col * colSize;
+          var y1 = row * rowSize;
+          var x2 = x1 + colSize;
+          var y2 = y1 + rowSize;
+          // Crop the small image
+          canvas.width = x2 - x1;
+          canvas.height = y2 - y1;
+          ctx.drawImage(img, x1, y1, x2 - x1, y2 - y1, 0, 0, x2 - x1, y2 - y1);
+          var small_img = new Image();
+          small_img.src = canvas.toDataURL();
+          // Resize the small image to newWidth x newHeight pixels
+          small_img.width = newWidth;
+          small_img.height = newHeight;
+          // Add the small image to the list
+          small_images.push(small_img);
+        }
+      }
+  
+      // Create a new image with the desired size and RGBA mode
+      canvas.width = cols * newWidth;
+      canvas.height = rows * newHeight;
+      ctx.fillStyle = "rgba(0, 0, 0, 0)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+  
+      // Paste the small images into the new image
+      for (var row = 0; row < rows; row++) {
+        for (var col = 0; col < cols; col++) {
+          // Get the current small image from the list
+          var small_img = small_images[row * cols + col];
+          // Calculate the coordinates where the small image should be pasted
+          var x = col * newWidth;
+          var y = row * newHeight;
+          // Paste the small image into the new image
+          ctx.drawImage(small_img, x, y);
+        }
+      }
+  
+      // Save the new image as a transparent PNG
+      var link = document.createElement('a');
+      link.download = "new_image1.png";
+      link.href = canvas.toDataURL();
+      link.click();
+    };
+  }
+  
+  // Example usage:
+  cropAndResizeImage("/content/large image.png", 64, 64, 48, 64);
+  
     // 해시(URL) 변경 이벤트, 해석 및 다시 그리기
     jHash.change(function() {
         params = jHash.val();
@@ -580,76 +651,5 @@ $(document).ready(function() {
     }
     nextFrame();
 
-// 리사이즈 함수 추가하기
-    function cropAndResizeImage(src, rowSize, colSize, newWidth, newHeight) {
-        // Open the large image
-        var img = new Image();
-        img.src = src;
-        img.onload = function() {
-          var canvas = document.createElement('canvas');
-          var ctx = canvas.getContext('2d');
-      
-          // Get the width and height of the image
-          var width = img.width;
-          var height = img.height;
-      
-          // Calculate the number of rows and columns of small images
-          var rows = height / rowSize;
-          var cols = width / colSize;
-      
-          // Create a list to store the cropped and resized images
-          var small_images = [];
-      
-          // Crop and resize the small images
-          for (var row = 0; row < rows; row++) {
-            for (var col = 0; col < cols; col++) {
-              // Calculate the coordinates of the current small image
-              var x1 = col * colSize;
-              var y1 = row * rowSize;
-              var x2 = x1 + colSize;
-              var y2 = y1 + rowSize;
-              // Crop the small image
-              canvas.width = x2 - x1;
-              canvas.height = y2 - y1;
-              ctx.drawImage(img, x1, y1, x2 - x1, y2 - y1, 0, 0, x2 - x1, y2 - y1);
-              var small_img = new Image();
-              small_img.src = canvas.toDataURL();
-              // Resize the small image to newWidth x newHeight pixels
-              small_img.width = newWidth;
-              small_img.height = newHeight;
-              // Add the small image to the list
-              small_images.push(small_img);
-            }
-          }
-      
-          // Create a new image with the desired size and RGBA mode
-          canvas.width = cols * newWidth;
-          canvas.height = rows * newHeight;
-          ctx.fillStyle = "rgba(0, 0, 0, 0)";
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
-      
-          // Paste the small images into the new image
-          for (var row = 0; row < rows; row++) {
-            for (var col = 0; col < cols; col++) {
-              // Get the current small image from the list
-              var small_img = small_images[row * cols + col];
-              // Calculate the coordinates where the small image should be pasted
-              var x = col * newWidth;
-              var y = row * newHeight;
-              // Paste the small image into the new image
-              ctx.drawImage(small_img, x, y);
-            }
-          }
-      
-          // Save the new image as a transparent PNG
-          var link = document.createElement('a');
-          link.download = "new_image1.png";
-          link.href = canvas.toDataURL();
-          link.click();
-        };
-      }
-      
-      // Example usage:
-      cropAndResizeImage("/content/large image.png", 64, 64, 48, 64);
-      
+
 });
