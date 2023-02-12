@@ -5,7 +5,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-	<title>젭 용 Sheet Character Generator</title>
+	<title>젭 용 spritesheet 생성기</title>
 	<link rel="stylesheet" type="text/css" href="chargen.css">
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
@@ -15,17 +15,17 @@
 </head>
 <body>
 	<header>
-		<h1>Character Generator</h1>
+		<h1>캐릭터 생성기</h1>
 	</header>
 	<div id="previewAnimationsBox">
-		Preview Animation:
+		애니메이션 미리보기:
 		<select id="whichAnim">
-			<option value="spellcast" data-row="0" data-num="4" data-cycle="7">Spellcast</option>
-			<option value="thrust" data-row="4" data-num="4" data-cycle="8">Thrust</option>
+			<option value="spellcast" data-row="0" data-num="4" data-cycle="7">스킬발동</option>
+			<option value="thrust" data-row="4" data-num="4" data-cycle="8">대쉬</option>
 			<option value="walk" selected data-row="8" data-num="4" data-cycle="9">Walk</option>
-			<option value="slash" data-row="12" data-num="4" data-cycle="6">Slash</option>
-			<option value="shoot" data-row="16" data-num="4" data-cycle="13">Shoot</option>
-			<option value="hurt" data-row="20" data-num="1" data-cycle="6">Hurt</option>
+			<option value="slash" data-row="12" data-num="4" data-cycle="6">베기</option>
+			<option value="shoot" data-row="16" data-num="4" data-cycle="13">쏘기</option>
+			<option value="hurt" data-row="20" data-num="1" data-cycle="6">다침</option>
 		</select>
 		<canvas id="previewAnimations" width="256" height="192"></canvas>
 	</div>
@@ -50,31 +50,31 @@
 	</form>
 	<form id="customizeChar">
 		<section id="chooser">
-			<p class="instr">Select from the character configuration options below.</p>
+			<p class="instr">아래 캐릭터 구성 옵션 중에서 선택하세요.</p>
 			<ul>
 				<li>
-					<span class="condensed">Sex</span>
+					<span class="condensed">성별</span>
 					<ul>
 						<li>
 							<input type="radio" id="sex-male" name="sex" checked>
-							<label for="sex-male">Male</label>
+							<label for="sex-male">남자</label>
 						</li>
 						<li>
 							<li>
 								<input type="radio" id="sex-female" name="sex">
-								<label for="sex-female">Female</label>
+								<label for="sex-female">여자</label>
 							</li>
 						</ul>
 					</li>
 					<li>
-						<span class="condensed">Body</span>
+						<span class="condensed">신체</span>
 						<ul>
 							<li>
 								<input type="radio" id="body-no_body" name="body" data-file_female="body/none.png" data-file_male="body/none.png">
 								<label for="body-no_body">None</label>
 							</li>
 							<li>
-								<span class="condensed">Human</span>
+								<span class="condensed">사람</span>
 								<ul>
 									<li>
 										<input type="radio" id="body-white" name="body" checked data-file_female="body/female/woman-white.png" data-file_male="body/male/man-white.png" data-hs_plain_male="hair/male/plain/shadows-lightbody.png" data-hs_ponytail2_female="hair/female/ponytail2/shadows-lightbody.png">
@@ -127,7 +127,7 @@
 								</ul>
 							</li>
 							<li>
-								<span class="condensed">Reptiles</span>
+								<span class="condensed">파충류</span>
 								<ul>
 									<li>
 										<input type="radio" id="body-reptbluewings" name="body" data-file_female="body/female/Drake_fem_blue_complete.png" data-file_male="body/male/Drake_male_blue_complete.png">
@@ -160,7 +160,7 @@
 								</ul>
 							</li>
 							<li>
-								<span class="condensed">Orcs</span>
+								<span class="condensed">오크</span>
 								<ul>
 									<li>
 										<input type="radio" id="body-orc" name="body" data-file_female="body/female/orcs/1.png" data-file_male="body/male/orcs/1.png">
@@ -185,7 +185,7 @@
 								</ul>
 							</li>
 							<li>
-								<span class="condensed">Skeleton</span>
+								<span class="condensed">스켈레톤</span>
 								<ul>
 									<li>
 										<input type="radio" id="body-skeleton" name="body" data-file="body/male/skeleton.png">
@@ -202,7 +202,7 @@
 								</ul>
 							</li>
 							<li>
-								<span class="condensed">Special</span>
+								<span class="condensed">스페셜</span>
 								<ul>
 									<li>
 										<input type="radio" id="body-magician" name="body" data-file_female="body/magician.png" data-file_male="body/magician.png">
@@ -231,7 +231,7 @@
 								</ul>
 							</li>
 							<li>
-								<span class="condensed">Pregnant</span>
+								<span class="condensed">임산부</span>
 								<ul>
 									<li>
 										<input type="radio" id="body-pregnant_coffee" name="body" data-file_female="body/pregnant/body-pregnant_coffee.png" data-file_male="body/pregnant/body-pregnant_coffee.png">
@@ -268,7 +268,7 @@
 								</ul>
 							</li>
 							<li>
-								<span class="condensed">Child</span>
+								<span class="condensed">어린이</span>
 								<ul>
 									<li><input type="radio" id="body-child_walk_darkelf2" name="body" data-file="body/child/child_walk_darkelf2.png"><label for="body-child_walk_darkelf2">child darkelf2</label></li>
 									<li><input type="radio" id="body-child_walk_peach" name="body" data-file="body/child/child_walk_peach.png"><label for="body-child_walk_peach">child peach</label></li>
@@ -293,26 +293,26 @@
 					</li>
 					<li>
 						<input type="checkbox" id="ribs_blood" name="ribs_blood" data-file="body/ribs_blood.png">
-						<label for="ribs_blood">Ribs wound</label>
+						<label for="ribs_blood">갈비뼈 부상</label>
 					</li>
 					<li>
 						<input type="checkbox" id="brain_blood" name="brain_blood" data-file="body/brain_blood.png">
-						<label for="brain_blood">Brain wound</label>
+						<label for="brain_blood">머리 부상</label>
 					</li>
 					<li>
 						<input type="checkbox" id="arm_blood" name="arm_blood" data-file="body/arm_blood.png">
-						<label for="arm_blood">Arm wound</label>
+						<label for="arm_blood">팔 부상</label>
 					</li>
 					<li>
 						<input type="checkbox" id="mouth_blood" name="mouth_blood" data-file="body/mouth_blood.png">
-						<label for="mouth_blood">Mouth wound</label>
+						<label for="mouth_blood">입 부상</label>
 					</li>
 					<li>
 						<input type="checkbox" id="eye_blood" name="eye_blood" data-file="body/eye_blood.png">
-						<label for="eye_blood">Eye wound</label>
+						<label for="eye_blood">눈 부상</label>
 					</li>
 					<li>
-						<span class="condensed">Eyes</span>
+						<span class="condensed">눈</span>
 						<ul>
 							<li>
 								<input type="radio" id="eyes-none" name="eyes" checked>
@@ -353,7 +353,7 @@
 						</ul>
 					</li>
 					<li>
-						<span class="condensed">Facial</span>
+						<span class="condensed">얼굴</span>
 						<ul>
 							<li>
 								<input type="radio" id="facial-none" name="facial" checked>
@@ -361,31 +361,31 @@
 							</li>
 							<li>
 								<input type="radio" id="facial-mask" name="facial" data-file_female="facial/Female_mask.png" data-file_male="facial/Male_mask.png">
-								<label for="facial-mask">Mask</label>
+								<label for="facial-mask">흰색 마스크</label>
 							</li>
 							<li>
 								<input type="radio" id="facial-maskD" name="facial" data-file_female="facial/Male_maskDark.png" data-file_male="facial/Male_maskDark.png">
-								<label for="facial-maskD">Mask dark</label>
+								<label for="facial-maskD">검은색 마스크</label>
 							</li>
 							<li>
 								<input type="radio" id="facial-glasses" name="facial" data-file_female="facial/formal_glasses.png" data-file_male="facial/formal_glasses.png">
-								<label for="facial-glasses">Glasses</label>
+								<label for="facial-glasses">안경</label>
 							</li>
 							<li>
 								<input type="radio" id="facial-monocle" name="facial" data-file_female="facial/formal_monocle.png" data-file_male="facial/formal_monocle.png">
-								<label for="facial-glasses">Monocle</label>
+								<label for="facial-glasses">한쪽 안경</label>
 							</li>
 							<li>
 								<input type="radio" id="facial-eyepatch" name="facial" data-file="facial/5.png">
-								<label for="facial-eyepatch">Patch</label>
+								<label for="facial-eyepatch">외눈박이</label>
 							</li>
 							<li>
 								<input type="radio" id="facial-sunglasses" name="facial" data-file="facial/3.png">
-								<label for="facial-sunglasses">Sunglasses</label>
+								<label for="facial-sunglasses">선글라스</label>
 							</li>
 
 							<li>
-								<span class="condensed">Bigstache <small>(Male)</small></span>
+								<span class="condensed">큰 콧수염 <small>(Male)</small></span>
 								<ul>
 									<li>
 										<input type="radio" id="facial-bigstache" name="facial" data-file="facial/male/bigstache/black.png">
@@ -506,7 +506,7 @@
 								</ul>
 							</li>
 							<li>
-								<span class="condensed">Mustache <small>(Male)</small></span>
+								<span class="condensed">콧수염 <small>(Male)</small></span>
 								<ul>
 									<li>
 										<input type="radio" id="facial-mustache" name="facial" data-file="facial/male/mustache/black.png">
@@ -627,7 +627,7 @@
 								</ul>
 							</li>
 							<li>
-								<span class="condensed">Beard <small>(Male)</small></span>
+								<span class="condensed">턱수염 <small>(Male)</small></span>
 								<ul>
 									<li>
 										<input type="radio" id="facial-beard" name="facial" data-file="facial/male/beard/black.png">
@@ -750,7 +750,7 @@
 						</ul>
 					</li>
 					<li>
-						<span class="condensed">Nose</span>
+						<span class="condensed">코</span>
 						<ul>
 							<li>
 								<input type="radio" id="nose-none" name="nose" checked>
@@ -771,7 +771,7 @@
 						</ul>
 					</li>
 					<li>
-						<span class="condensed">Shoes</span>
+						<span class="condensed">신발</span>
 						<ul>
 							<li>
 								<input type="radio" id="shoes-none" name="shoes" checked>
@@ -849,7 +849,7 @@
 						</ul>
 					</li>
 					<li>
-						<span class="condensed">Legs</span>
+						<span class="condensed">하의</span>
 						<ul>
 							<li>
 								<input type="radio" id="legs-none" name="legs" checked>
@@ -1078,7 +1078,7 @@
 						</ul>
 					</li>
 					<li>
-						<span class="condensed">Boots</span>
+						<span class="condensed">신발</span>
 						<ul>
 							<li>
 								<input type="radio" id="boots-none" name="boots" checked>
@@ -1095,7 +1095,7 @@
 						</ul>
 					</li>
 					<li>
-						<span class="condensed">Clothes</span>
+						<span class="condensed">의상</span>
 						<ul>
 							<li>
 								<input type="radio" id="clothes-none" name="clothes" checked>
@@ -1587,7 +1587,7 @@
 						</ul>
 					</li>
 					<li>
-						<span class="condensed">Mail</span>
+						<span class="condensed">철 갑옷</span>
 						<ul>
 							<li>
 								<input type="radio" id="mail-none" name="mail" checked>
@@ -1600,7 +1600,7 @@
 						</ul>
 					</li>
 					<li>
-						<span class="condensed">Armor</span>
+						<span class="condensed">방어구</span>
 						<ul>
 							<li>
 								<input type="radio" id="armor-none" name="armor" checked>
@@ -1676,7 +1676,7 @@
 						</ul>
 					</li>
 					<li>
-						<span class="condensed">Jacket</span>
+						<span class="condensed">재킷</span>
 						<ul>
 							<li>
 								<input type="radio" id="jacket-none" name="jacket" checked>
@@ -1758,7 +1758,7 @@
 					</li>
 				</li>
 				<li>
-					<span class="condensed">Arms</span>
+					<span class="condensed">팔갑옷</span>
 					<ul>
 						<li>
 							<input type="radio" id="arms-none" name="arms" checked>
@@ -1791,7 +1791,7 @@
 					</ul>
 				</li>
 				<li>
-					<span class="condensed">Shoulders</span>
+					<span class="condensed">어깨</span>
 					<ul>
 						<li>
 							<input type="radio" id="shoulders-none" name="shoulders" checked>
@@ -1854,7 +1854,7 @@
 					</ul>
 				</li>
 				<li>
-					<span class="condensed">Bracers</span>
+					<span class="condensed">팔뚝 보호대</span>
 					<ul>
 						<li>
 							<input type="radio" id="bracers-none" name="bracers" checked>
@@ -1895,7 +1895,7 @@
 					</ul>
 				</li>
 				<li>
-					<span class="condensed">Greaves</span>
+					<span class="condensed">아대</span>
 					<ul>
 						<li>
 							<input type="radio" id="greaves-none" name="greaves" checked>
@@ -1928,7 +1928,7 @@
 					</ul>
 				</li>
 				<li>
-					<span class="condensed">Gloves</span>
+					<span class="condensed">장갑</span>
 					<ul>
 						<li>
 							<input type="radio" id="gloves-none" name="gloves" checked>
@@ -1965,7 +1965,7 @@
 					</ul>
 				</li>
 				<li>
-					<span class="condensed">Belts</span>
+					<span class="condensed">벨트</span>
 					<ul>
 						<li>
 							<input type="radio" id="belt-none" name="belt" checked>
@@ -2025,7 +2025,7 @@
 					</ul>
 				</li>
 				<li>
-					<span class="condensed">Buckles</span>
+					<span class="condensed">버클</span>
 					<ul>
 						<li>
 							<input type="radio" id="buckle-none" name="buckle" checked>
@@ -2050,7 +2050,7 @@
 					</ul>
 				</li>
 				<li>
-					<span class="condensed">Necklaces</span>
+					<span class="condensed">목걸이(여자캐릭터만)</span>
 					<ul>
 						<li>
 							<input type="radio" id="necklace-none" name="necklace" checked>
@@ -2075,7 +2075,7 @@
 					</ul>
 				</li>
 				<li>
-					<span class="condensed">Bracelet</span>
+					<span class="condensed">팔찌</span>
 					<ul>
 						<li>
 							<input type="radio" id="bracelet-none" name="bracelet" checked>
@@ -2088,7 +2088,7 @@
 					</ul>
 				</li>
 				<li>
-					<span class="condensed">Cape</span>
+					<span class="condensed">망토</span>
 					<ul>
 						<li>
 							<input type="radio" id="cape-none" name="cape" checked>
@@ -2244,7 +2244,7 @@
 					</ul>
 				</li>
 				<li>
-					<span class="condensed">Neck</span>
+					<span class="condensed">목 악세사리</span>
 					<ul>
 						<li>
 							<input type="radio" id="capeacc-none" name="capeacc" checked>
@@ -2389,7 +2389,7 @@
 					</ul>
 				</li>
 				<li>
-					<span class="condensed">Shield</span>
+					<span class="condensed">방패</span>
 					<ul>
 						<li>
 							<input type="radio" id="shield-none" name="shield" checked>
@@ -2474,7 +2474,7 @@
 					</ul>
 				</li>
 				<li>
-					<span class="condensed">Quiver</span>
+					<span class="condensed">화살통</span>
 					<ul>
 						<li>
 							<input type="radio" id="quiver-none" name="quiver" checked>
@@ -2487,7 +2487,7 @@
 					</ul>
 				</li>
 				<li>
-					<span class="condensed">Hair</span>
+					<span class="condensed">머리 스타일</span>
 					<ul>
 						<li>
 							<input type="radio" id="hair-none" name="hair" checked>
@@ -4632,7 +4632,7 @@
 					</ul>
 				</li>
 				<li>
-					<span class="condensed">Ears</span>
+					<span class="condensed">귀</span>
 					<ul>
 						<li>
 							<input type="radio" id="ears-none" name="ears" checked>
@@ -4649,7 +4649,7 @@
 					</ul>
 				</li>
 				<li>
-					<span class="condensed">Hats</span>
+					<span class="condensed">모자</span>
 					<ul>
 						<li>
 							<input type="radio" id="hat-none" name="hat" checked>
@@ -4972,7 +4972,7 @@
 					</ul>
 				</li>
 				<li>
-					<span class="condensed">Weapon</span>
+					<span class="condensed">무기</span>
 					<ul>
 						<li>
 							<input type="radio" id="weapon-none" name="weapon" checked>
@@ -5261,7 +5261,7 @@
 					</ul>
 				</li>
 				<li>
-					<span class="condensed">Ammo</span>
+					<span class="condensed">화살</span>
 					<ul>
 						<li>
 							<input type="radio" id="ammo-none" name="ammo" checked>
