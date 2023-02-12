@@ -78,7 +78,7 @@ $(document).ready(function() {
     });
 
     var canvas = $("#spritesheet").get(0); //document.getElementById("spritesheet")와 동일
-    var canvas_con = cropAndResizeImage("/content/large image.png", 64, 64, 48, 64)
+    var canvas_con = cropAndResizeImage(canvas, 64, 64, 48, 64)
     var ctx = canvas.getContext("2d");
 
     const maxColors = 200;
