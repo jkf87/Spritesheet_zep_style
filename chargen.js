@@ -77,7 +77,8 @@ $(document).ready(function() {
         $("#chooser>ul span.expanded").removeClass("expanded").addClass("condensed");
     });
 
-    var canvas = $("#spritesheet").get(0);
+    var canvas = $("#spritesheet").get(0); //document.getElementById("spritesheet")와 동일
+    var canvas_con = cropAndResizeImage("/content/large image.png", 64, 64, 48, 64)
     var ctx = canvas.getContext("2d");
 
     const maxColors = 200;
@@ -109,7 +110,7 @@ $(document).ready(function() {
 
     //png파일로 저장합니다.
     $("#saveAsPNG").click(function() {
-        renameImageDownload(this, canvas, 'Download' + Math.floor(Math.random() * 100000) + '.png');
+        renameImageDownload(this, canvas_con, 'Download' + Math.floor(Math.random() * 100000) + '.png');
     });
 
     $("#resetAll").click(function() {
