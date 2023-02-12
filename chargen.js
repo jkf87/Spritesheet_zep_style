@@ -152,7 +152,7 @@ function cropAndResizeImage(src, rowSize, colSize, newWidth, newHeight) {
     var canvasUrl = canvas.URL
     var canvas2 = cropAndResizeImage(canvasUrl, 64, 64, 48, 64)
     var ctx = canvas.getContext("2d");
-
+    console.log(canvas2)
     const maxColors = 200;
 
     $("#previewFile").change(function() {
